@@ -88,7 +88,7 @@ class AlunoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 
 class NotasCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
-    group_required = u"Administrador"
+    group_required = [u"Administrador", u"Professores"]
     login_url= reverse_lazy('login')
     model = Notas
     fields = ['RA', 'CodEscola', 'NumRegistro', 'Nota_Ativ1', 'Nota_P1','Nota_Ativ2', 'Nota_P2', 'Nota_Ativ3', 'Nota_P3', 'Nota_Ativ4', 'Nota_P4']
@@ -168,7 +168,7 @@ class EscolaUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         return context
 
 class NotasUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
-    group_required = u"Administrador"
+    group_required = [u"Administrador", u"Professores"]
     login_url= reverse_lazy('login')
     model = Notas
     fields = ['RA', 'CodEscola', 'NumRegistro', 'Nota_Ativ1', 'Nota_P1','Nota_Ativ2', 'Nota_P2', 'Nota_Ativ3', 'Nota_P3', 'Nota_Ativ4', 'Nota_P4']
@@ -229,7 +229,7 @@ class EscolaDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
         return context 
 
 class NotasDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
-    group_required = u"Administrador"
+    group_required = [u"Administrador", u"Professores"]
     login_url= reverse_lazy('login')
     model = Notas
     fields = ['RA', 'CodEscola', 'NumRegistro', 'Nota_Ativ1', 'Nota_P1','Nota_Ativ2', 'Nota_P2', 'Nota_Ativ3', 'Nota_P3', 'Nota_Ativ4', 'Nota_P4']
