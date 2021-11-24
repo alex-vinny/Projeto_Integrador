@@ -1,0 +1,240 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-with-button-logo.css">
+    <title>Notas</title>
+
+
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'css/modelo.css' %}">
+
+    
+</body>
+</html>
+
+<div id="striped">
+    
+    <ul id="menu">
+             
+        <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            Início</a>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Informações aluno</a>
+            <ul>
+                <li><a href="{% url 'lista-notas' %}">Boletim escolar</a></li>
+                <li><a href="#">Dados Matrícula</a></li>
+                <li><a href="#">Responsável</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Cadastrar</a>
+            <ul>
+                <li><a href="{% url 'cadastrar-aluno' %}">Alunos</a></li>
+                <li><a href="{% url 'cadastrar-professor' %}">Professores</a></li>
+                <li><a href="{% url 'cadastrar-escola' %}">Escola</a></li>
+                <li><a href="{% url 'cadastrar-notas' %}">Notas</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#">
+            <i class="fa fa-university" aria-hidden="true"></i>
+            Contatos escola</a></li>
+
+        <li class="nav-item"> <a class="nav-link" href="{% url 'avisos' %}">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Avisos</a>
+        </li>
+        
+        <li class="nav-item"><a class="nav-link" href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Usuário</a>
+            <ul>
+                <li><a href="{% url 'cadastrar-aluno' %}">Alterar Senha</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout</a></li>
+            </ul>
+        </li>
+
+
+    </ul>
+    </div>
+
+    <link rel="stylesheet" href="{% static 'css/rodape.css' %}">
+    
+    <h3>Notas Alunos</h3>
+    <h4><b>*Cálculo Médias</b></h4>
+    <p> <b>Bimestres =</b> (Notas Atividade x 0,30) + (Notas Provas x 0,70)</p>
+    <p> <b>Final =</b> (Soma das Médias Bimestes) / 4  </p> 
+
+    <hr>
+    <a href="{% url 'cadastrar-notas' %}" class="btn btn-primary btn-sm">Adicionar Notas</a>
+
+    </hr>
+
+    <hr>
+    <form action="?" method="GET">
+
+        <input type="text" name="RA" id="{{ request.GET.RA }}" value="" class="fa-border" autocomplete="off" placeholder="Digite o RA">
+        <button type="submit" class="btn btn-success">Buscar</button>
+
+        <a href="{% url 'lista-notas' %}" class="btn btn-light">Limpar</a>
+
+    </form>
+
+    </hr>
+
+    <table class="table table-striped">
+        <tr>
+            <th>RA</th>
+            <th>Prof</th>
+            <th>1º Bim</th>
+            <th>2º Bim</th>
+            <th>3º Bim</th>
+            <th>4º Bim</th>
+            <th>Média Final</th>
+            <th>Criado</th>
+
+
+            <th>Opções</th>
+        </tr>
+        
+
+        
+
+          {% for notas in object_list %}
+            <tr>
+              <td>{{ notas.RA }}</td>
+              <td>{{ notas.NumRegistro }}</td>
+              <td>{{ notas.Bim_1 }}</td>
+              <td>{{ notas.Bim_2 }}</td>
+              <td>{{ notas.Bim_3 }}</td>
+              <td>{{ notas.Bim_4}}</td>
+              <td>{{ notas.Media_Final }}</td>
+              <td>{{ notas.usuario}}</td>
+
+            
+              <td>
+                 <a href="{% url 'editar-notas' notas.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <i class="fa fa-pencil" aria-hidden="true">  </i>
+                </a>
+                 <a href="{% url 'excluir-notas' notas.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <i class="fa fa-trash" aria-hidden="true">  </i>
+                 </a>
+              </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+              <td colspan="">Nenhum campo registrado.</td>
+            </tr>
+
+          {% endfor %}
+        
+
+    </table>
+    <ul class="pagination justify-content-center">
+    
+        {% if page_obj.has_previous %}
+
+            {% if request.GET.RA %}
+            <li class="page-item"><a class="page-link" href="?page=1&RA={{request.GET.RA}}">&laquo; Primeira</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&RA={{request.GET.RA}}">Anterior</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+            {% endif %}
+
+        {% endif %}
+    
+        <li class="page-item">
+            <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
+        </li>
+    
+        {% if page_obj.has_next %}
+            {% if request.GET.RA %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&RA={{request.GET.RA}}">Próxima</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&RA={{request.GET.RA}}">Última &raquo;</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></li>
+            {% endif %}
+        {% endif %}
+    
+    </ul>        
+        
+    </div>
+      
+    
+    </form>
+
+    {% block rodape %}
+    <div class="content">
+    </div>
+        <footer id="myFooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h2 class="logo"><img src="{% static 'img/Projeto Integrador.jpg' %}" width="230" alt=""></a></h2>
+                    </div>
+                    <div class="col-sm-2">                                                                          
+                        <h5>Notícias</h5>
+                        <ul>
+                            <li><a href="https://www.campolimpopaulista.sp.gov.br/site/">Município</a></li>
+                            <li><a href="https://campolimpopaulista.sp.gov.br/site/governo/secretaria-de-educacao.html">Secretaria de Educação</a></li>
+                            <li><a href="https://www.saopaulo.sp.gov.br/">Estado de São Paulo</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h5>Covid-19</h5>
+                        <ul>
+                            <li><a href="https://www.campolimpopaulista.sp.gov.br/site/covid-19/boletim-covid-19.html">Boletim</a></li>
+                            <li><a href="http://52.67.86.57/pronimtb/index.asp?acao=21&item=1&visao=paginaprincipalcovid">Transparência</a></li>
+                            <li><a href="https://www.campolimpopaulista.sp.gov.br/agendamento-vacinacao/">Agendar Vacinação</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="social-networks">
+                            <a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/" class="instagram"><i class="fa fa-instagram"></i></a>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2019 Copyright - Escola Integrada</p>
+            </div>
+        </footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
+    </div>
+    {% endblock %}
+    
+         
+
+   
+
+</body>
+</html>
