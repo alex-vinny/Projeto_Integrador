@@ -35,8 +35,7 @@
             Informações aluno</a>
             <ul>
                 <li><a href="{% url 'lista-notas' %}">Boletim escolar</a></li>
-                <li><a href="#">Dados Matrícula</a></li>
-                <li><a href="#">Responsável</a></li>
+                <li><a href="{% url 'lista-alunos' %}">Dados Matrícula</a></li>
             </ul>
         </li>
 
@@ -51,11 +50,11 @@
             </ul>
         </li>
 
-        <li class="nav-item"><a class="nav-link" href="#">
+        <li class="nav-item"><a class="nav-link" href="{% url 'lista-escola' %}">
             <i class="fa fa-university" aria-hidden="true"></i>
             Contatos escola</a></li>
 
-        <li class="nav-item"> <a class="nav-link" href="{% url 'avisos' %}">
+        <li class="nav-item"> <a class="nav-link" href="{% url 'lista-avisos' %}">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
             Avisos</a>
         </li>
@@ -64,7 +63,7 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
             Usuário</a>
             <ul>
-                <li><a href="{% url 'cadastrar-aluno' %}">Alterar Senha</a></li>
+                <li><a href="{% url 'registrar' %}">Registrar Usuário</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                     Logout</a></li>

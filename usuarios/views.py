@@ -12,7 +12,7 @@ class UsuarioCreate(CreateView, GroupRequiredMixin):
     template_name = "cadastros/form.html"
     group_required = u"Administrador"
     form_class = UsuarioForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('logout')
 
     def form_valid(self, form):
         grupo = get_object_or_404(Group, name="Alunos")

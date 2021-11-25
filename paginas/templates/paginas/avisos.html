@@ -16,7 +16,8 @@
 </head>
 <body>
     <link rel="stylesheet" href="{% static 'css/modelo.css' %}">
-    
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css"/>
 
 </body>
 </html>
@@ -35,8 +36,7 @@
             Informações aluno</a>
             <ul>
                 <li><a href="{% url 'lista-notas' %}">Boletim escolar</a></li>
-                <li><a href="#">Dados Matrícula</a></li>
-                <li><a href="#">Responsável</a></li>
+                <li><a href="{% url 'lista-alunos' %}">Dados Matrícula</a></li>
             </ul>
         </li>
 
@@ -51,11 +51,11 @@
             </ul>
         </li>
 
-        <li class="nav-item"><a class="nav-link" href="#">
+        <li class="nav-item"><a class="nav-link" href="{% url 'lista-escola' %}">
             <i class="fa fa-university" aria-hidden="true"></i>
             Contatos escola</a></li>
 
-        <li class="nav-item"> <a class="nav-link" href="{% url 'avisos' %}">
+        <li class="nav-item"> <a class="nav-link" href="{% url 'lista-avisos' %}">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
             Avisos</a>
         </li>
@@ -64,21 +64,68 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
             Usuário</a>
             <ul>
-                <li><a href="{% url 'cadastrar-aluno' %}">Alterar Senha</a></li>
+                <li><a href="{% url 'registrar' %}">Registrar Usuário</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                     Logout</a></li>
             </ul>
         </li>
 
-
     </ul>
     </div>
 
     <link rel="stylesheet" href="{% static 'css/rodape.css' %}">
     
-    <h3>23/11 - Reunião de pais e mestres as 15h00min! </h3>
+    <h3>Mural de Avisos</h3>
+
+       
+    <table class="table table-striped" id="tabela_listar">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Data Evento</th>
+            <th>Horário</th>
+            <th>Código Escola</th>
+            <th>Recado</th>
+            
+            <th>Opções</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for avisos in object_list %}
+            <tr>
+              <td>{{ avisos.pk }}</td>
+              <td>{{ avisos.DataEvento }}</td>
+              <td>{{ avisos.Horario }}</td>
+              <td>{{ avisos.CodEscola }}</td>
+              <td>{{ avisos.Recado }}</td>              
+           
+              <td>
+                 <a href="{% url 'editar-avisos' avisos.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <i class="fa fa-pencil" aria-hidden="true">  </i>
+                </a>
+                 <a href="{% url 'excluir-avisos' avisos.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <i class="fa fa-trash" aria-hidden="true">  </i>
+                 </a>
+              </td>
+
+            </tr>
+          {% empty %}
+          <tr>
+              <td colspan="">Nenhum campo registrado.</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+
+    </table>
+
+      
     
+    </form>    
+
     {% block rodape %}
     <div class="content">
     </div>
