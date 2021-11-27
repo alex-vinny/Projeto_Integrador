@@ -49,8 +49,14 @@
         </li>
 
         <li class="nav-item"><a class="nav-link" href="{% url 'lista-escola' %}">
-            <i class="fa fa-university" aria-hidden="true"></i>
-            Contatos escola</a></li>
+            <i class="fa fa-book" aria-hidden="true"></i>
+            Contatos</a>
+            <ul>
+                <li><a href="{% url 'lista-escola' %}">Alunos</a></li>
+                <li><a href="{% url 'lista-professor' %}">Professores</a></li>
+            </ul>
+        
+        </li>
 
         <li class="nav-item"> <a class="nav-link" href="{% url 'lista-avisos' %}">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -77,7 +83,7 @@
     
     <p>Identificamos em nosso munícipio, que muitas escolas não possuem um ambiente virtual para que os responsáveis dos alunos consigam acessar informações a respeito do desempenho escolar do aluno</p>
     <p>O intuito do nosso projeto integrador, é criar esse ambiente virtual onde os responsáveis pelos alunos conseguirão acessar as informação de forma online.</p>
-    <p>Dessa forma, surgiu o projeto "Escola Integrada", visando beneficiar .</p>
+    <p>Dessa forma, surgiu o projeto "Escola Integrada", visando beneficiar a comunidade externa em questão.</p>
     <P></P>
     <p></p>
     <p><b>Um agradecimento em especial a professora Giovanna, que nos auxiliou e orientou durante todo o processo de desenvolvimento do projeto.</b></p>

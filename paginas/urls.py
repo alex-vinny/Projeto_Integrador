@@ -2,7 +2,6 @@ from django.urls import path
 from .views import AvisosCreate, AvisosList, PaginaInicial, MenuView, AvisosDelete, AvisosUpdate
 
 urlpatterns = [
-    path('', PaginaInicial.as_view(), name="login"),
     path('menu/', MenuView.as_view(), name="menu"),
     path('incluir/avisos/', AvisosCreate.as_view(), name="incluir-avisos"),
     path('editar/avisos/<int:pk>/', AvisosUpdate.as_view(), name='editar-avisos'),

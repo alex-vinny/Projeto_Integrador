@@ -1,4 +1,3 @@
-from django.utils.translation import templatize
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from .models import Professor, Escola, Alunos, Notas
@@ -12,7 +11,7 @@ class ProfessorCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url= reverse_lazy('login')
     group_required = u"Administrador"
     model = Professor
-    fields = ['NumRegistro', 'CodEscola', 'NomeProf', 'Materia', 'EmailProf', 'SenhaProf']
+    fields = ['NumRegistro', 'CodEscola', 'NomeProf', 'Materia', 'EmailProf']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('lista-professor')
 
@@ -65,7 +64,7 @@ class AlunoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = u"Administrador"
     login_url= reverse_lazy('login')
     model = Alunos
-    fields = ['RA', 'CodEscola', 'NomeAluno', 'Serie', 'Periodo', 'DataNasci', 'Sexo', 'EmailAluno', 'SenhaAluno', 'NomeResp', 'GrauParent', 'TelContato']
+    fields = ['RA', 'CodEscola', 'NomeAluno', 'Serie', 'Periodo', 'DataNasci', 'Sexo', 'EmailAluno', 'NomeResp', 'GrauParent', 'TelContato']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('lista-alunos')
     
@@ -91,7 +90,7 @@ class NotasCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = [u"Administrador", u"Professores"]
     login_url= reverse_lazy('login')
     model = Notas
-    fields = ['RA', 'CodEscola', 'NumRegistro', 'Nota_Ativ1', 'Nota_P1','Nota_Ativ2', 'Nota_P2', 'Nota_Ativ3', 'Nota_P3', 'Nota_Ativ4', 'Nota_P4']
+    fields = ['RA', 'CodEscola', 'NumRegistro', 'Nota_Ativ1', 'Nota_P1', 'Freq_1', 'Nota_Ativ2', 'Nota_P2', 'Freq_2', 'Nota_Ativ3', 'Nota_P3', 'Freq_3', 'Nota_Ativ4', 'Nota_P4', 'Freq_4']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('lista-notas')
 
@@ -119,7 +118,7 @@ class AlunosUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Administrador"
     login_url= reverse_lazy('login')
     model = Alunos
-    fields = ['RA', 'CodEscola', 'NomeAluno', 'Serie', 'Periodo', 'DataNasci', 'Sexo', 'EmailAluno', 'SenhaAluno', 'NomeResp', 'GrauParent', 'TelContato']
+    fields = ['RA', 'CodEscola', 'NomeAluno', 'Serie', 'Periodo', 'DataNasci', 'Sexo', 'EmailAluno',  'NomeResp', 'GrauParent', 'TelContato']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('lista-alunos')
 
@@ -137,7 +136,7 @@ class ProfessorUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Administrador"
     login_url= reverse_lazy('login')
     model = Professor
-    fields = ['NumRegistro', 'CodEscola', 'NomeProf', 'Materia', 'EmailProf', 'SenhaProf']
+    fields = ['NumRegistro', 'CodEscola', 'NomeProf', 'Materia', 'EmailProf']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('lista-professor')
 

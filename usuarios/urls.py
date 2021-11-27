@@ -4,7 +4,7 @@ from django.views.generic.base import View
 from .views import UsuarioCreate
 
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(
+    path('', auth_views.LoginView.as_view(
         template_name='usuarios/login2.html'
         ), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

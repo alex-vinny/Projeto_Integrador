@@ -30,7 +30,6 @@ class Professor(models.Model):
     NomeProf = models.CharField(max_length=50, verbose_name="Nome Professor")
     Materia = models.CharField(max_length=30, verbose_name="Matéria")
     EmailProf = models.CharField(max_length=40, verbose_name="Email Professor")
-    SenhaProf = models.CharField(max_length=15,verbose_name="Senha Professor")
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     
     def __str__(self):
@@ -51,7 +50,6 @@ class Alunos(models.Model):
     ]
     Sexo = models.CharField(max_length=2, choices=Sexo)
     EmailAluno = models.CharField(max_length=40, verbose_name="Email Aluno")
-    SenhaAluno = models.CharField(max_length=15, null=True, verbose_name="Senha Aluno")
     NomeResp = models.CharField(max_length=50, verbose_name="Nome Responsável")
     GrauParent = models.CharField(max_length=5, verbose_name="Grau de Parentesco")
     TelContato = models.CharField(max_length=15, verbose_name="Telefone de Contato")
@@ -66,12 +64,16 @@ class Notas(models.Model):
     NumRegistro = models.ForeignKey(Professor, on_delete=PROTECT)
     Nota_Ativ1 = models.DecimalField(decimal_places=2, max_digits=4, verbose_name="Atividade 1")
     Nota_P1 = models.DecimalField(decimal_places=2, max_digits=4, verbose_name="Prova 1")
+    Freq_1 = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Frequência 1º Bim")
     Nota_Ativ2 = models.DecimalField(decimal_places=2, max_digits=4, verbose_name="Atividade 2")
     Nota_P2 = models.DecimalField(decimal_places=2, max_digits=4,verbose_name="Prova 2")
+    Freq_2 = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Frequência 2º Bim")
     Nota_Ativ3 = models.DecimalField(decimal_places=2, max_digits=4,verbose_name="Atividade 3")
     Nota_P3 = models.DecimalField(decimal_places=2, max_digits=4, verbose_name="Prova 3")
+    Freq_3 = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Frequência 3º Bim")
     Nota_Ativ4 = models.DecimalField(decimal_places=2, max_digits=4,verbose_name="Atividade 4")
     Nota_P4 = models.DecimalField(decimal_places=2, max_digits=4, verbose_name="Prova 4")
+    Freq_4 = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Frequência 4º Bim")
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
 
@@ -89,3 +91,6 @@ class Notas(models.Model):
     
     def Media_Final(self):
         return ((((self.Nota_Ativ1+self.Nota_Ativ2+self.Nota_Ativ3+self.Nota_Ativ4)*30)+((self.Nota_P1+self.Nota_P2+self.Nota_P3+self.Nota_P4)*70))/100)/4
+
+    def Freq_Final(self):
+        return ((self.Freq_1)+(self.Freq_2)+(self.Freq_3)+(self.Freq_4))/4

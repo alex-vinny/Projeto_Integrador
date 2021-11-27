@@ -51,8 +51,14 @@
         </li>
 
         <li class="nav-item"><a class="nav-link" href="{% url 'lista-escola' %}">
-            <i class="fa fa-university" aria-hidden="true"></i>
-            Contatos escola</a></li>
+            <i class="fa fa-book" aria-hidden="true"></i>
+            Contatos</a>
+            <ul>
+                <li><a href="{% url 'lista-escola' %}">Alunos</a></li>
+                <li><a href="{% url 'lista-professor' %}">Professores</a></li>
+            </ul>
+        
+        </li>
 
         <li class="nav-item"> <a class="nav-link" href="{% url 'lista-avisos' %}">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -100,12 +106,13 @@
     <table class="table table-striped">
         <tr>
             <th>RA</th>
-            <th>Prof</th>
+            <th>Professor</th>
             <th>1º Bim</th>
             <th>2º Bim</th>
             <th>3º Bim</th>
             <th>4º Bim</th>
             <th>Média Final</th>
+            <th>Frequência %</th>
             <th>Criado</th>
 
 
@@ -124,6 +131,7 @@
               <td>{{ notas.Bim_3 }}</td>
               <td>{{ notas.Bim_4}}</td>
               <td>{{ notas.Media_Final }}</td>
+              <td>{{ notas.Freq_Final }}</td>
               <td>{{ notas.usuario}}</td>
 
             
