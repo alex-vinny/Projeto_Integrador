@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'crispy_forms',
     'mathfilters',
+    'corsheaders',
 ]
 
 #Crispy_Forms
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Projeto_Integrador.urls'
@@ -123,6 +126,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Configuração de CORS
+CORS_ALLOWED_ORIGINS = [
+    'https://projeto-escola-integrada.herokuapp.com',
+    'http://localhost:5000',
+    'http://127.0.0.1:5000',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
