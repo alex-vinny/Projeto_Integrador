@@ -26,7 +26,7 @@ SECRET_KEY = '5l&1-osf*-8qd^kgtx9fs^c0v%)@jfhi)2=j_)b=1b#4m%ln_e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://projeto-integrador-escola.herokuapp.com/']
+ALLOWED_HOSTS = ['https://projeto-escola-integrada.herokuapp.com/']
 
 
 # Application definition
